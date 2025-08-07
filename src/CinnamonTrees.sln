@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinnamonTrees.Core", "core\CinnamonTrees.Core\CinnamonTrees.Core.csproj", "{CC84AAEF-9CBE-41AC-9A3E-6F00BBED8901}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{50B00DAE-55CD-4881-9BF3-2E3D2E145B79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discounts", "Discounts", "{E9536C02-1444-42FC-9734-6DAB120A2744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinnamonTrees.Samples.Discounts", "samples\discounts\CinnamonTrees.Samples.Discounts\CinnamonTrees.Samples.Discounts.csproj", "{3B947D06-E52B-4B67-8750-2E2751FEF1EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualization", "Visualization", "{6D31EF62-3DEE-4A04-BBE9-7F6A700E35B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mermaid", "Mermaid", "{99682379-3AAC-480C-969F-F34D74012086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinnamonTrees.Visualization.Mermaid", "visualization\mermaid\CinnamonTrees.Visualization.Mermaid\CinnamonTrees.Visualization.Mermaid.csproj", "{E7D36347-618E-4480-9AC1-F25997C63608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinnamonTrees.Samples.Discounts.Tests", "samples\discounts\CinnamonTrees.Samples.Discounts.Tests\CinnamonTrees.Samples.Discounts.Tests.csproj", "{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC84AAEF-9CBE-41AC-9A3E-6F00BBED8901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC84AAEF-9CBE-41AC-9A3E-6F00BBED8901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC84AAEF-9CBE-41AC-9A3E-6F00BBED8901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC84AAEF-9CBE-41AC-9A3E-6F00BBED8901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B947D06-E52B-4B67-8750-2E2751FEF1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B947D06-E52B-4B67-8750-2E2751FEF1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B947D06-E52B-4B67-8750-2E2751FEF1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B947D06-E52B-4B67-8750-2E2751FEF1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D36347-618E-4480-9AC1-F25997C63608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D36347-618E-4480-9AC1-F25997C63608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D36347-618E-4480-9AC1-F25997C63608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D36347-618E-4480-9AC1-F25997C63608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9536C02-1444-42FC-9734-6DAB120A2744} = {50B00DAE-55CD-4881-9BF3-2E3D2E145B79}
+		{3B947D06-E52B-4B67-8750-2E2751FEF1EB} = {E9536C02-1444-42FC-9734-6DAB120A2744}
+		{99682379-3AAC-480C-969F-F34D74012086} = {6D31EF62-3DEE-4A04-BBE9-7F6A700E35B3}
+		{E7D36347-618E-4480-9AC1-F25997C63608} = {99682379-3AAC-480C-969F-F34D74012086}
+		{635ADB54-12D2-4D3C-9F28-CBF2DF62AAC3} = {E9536C02-1444-42FC-9734-6DAB120A2744}
+	EndGlobalSection
+EndGlobal
