@@ -14,3 +14,5 @@ jobs:
     with:
       project_path: src/core/CinnamonTrees.Core/CinnamonTrees.Core.csproj
       package_id: CinnamonTrees.Core
+    secrets:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
