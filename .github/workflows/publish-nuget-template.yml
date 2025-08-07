@@ -45,7 +45,7 @@ jobs:
         id: check_version
         run: |
           PACKAGE_NAME="${{ inputs.package_id }}"
-          PACKAGE_VERSION="${{ steps.extract_version.outputs.version }}
+          PACKAGE_VERSION="${{ steps.extract_version.outputs.version }}"
           LOWER_PACKAGE_NAME=$(echo "$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')
           URL="https://api.nuget.org/v3-flatcontainer/${LOWER_PACKAGE_NAME}/${PACKAGE_VERSION}/${LOWER_PACKAGE_NAME}.nuspec"
 
