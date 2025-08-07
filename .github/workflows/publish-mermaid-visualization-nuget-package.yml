@@ -15,3 +15,5 @@ jobs:
       project_path: src/visualization/mermaid/CinnamonTrees.Visualization.Mermaid/CinnamonTrees.Visualization.Mermaid.csproj
       package_id: CinnamonTrees.Visualization.Mermaid
       use_package_reference: true
+    secrets:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
