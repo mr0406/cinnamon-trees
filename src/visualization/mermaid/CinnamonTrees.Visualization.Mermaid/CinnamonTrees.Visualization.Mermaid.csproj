@@ -19,9 +19,9 @@
         <RepositoryUrl>https://github.com/mr0406/cinnamon-trees</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-    
+
     <PropertyGroup>
-        <UsePackageReference>false</UsePackageReference>
+        <UsePackageReference Condition="'$(UsePackageReference)' == ''">false</UsePackageReference>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(UsePackageReference)' == 'false'">
