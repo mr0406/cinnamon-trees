@@ -51,10 +51,10 @@ jobs:
 
           if curl --silent --head --fail "$URL" > /dev/null; then
               echo "✅ Package exists."
-              echo "package_exists=true" >> "$GITHUB_ENV"
+              echo "package_exists=true" >> $GITHUB_OUTPUT
           else
               echo "❌ Package does not exist."
-              echo "package_exists=false" >> "$GITHUB_ENV"
+              echo "package_exists=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Publish package if version not exists
