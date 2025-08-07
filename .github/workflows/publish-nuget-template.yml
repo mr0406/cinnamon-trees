@@ -35,6 +35,7 @@ jobs:
           EXTRA_ARGS=""
           if [ "${{ inputs.use_package_reference }}" = "true" ]; then
             EXTRA_ARGS="-p:UsePackageReference=true"
+            echo "✅ Use package reference"
           fi
           dotnet pack ${{ inputs.project_path }} --configuration Release --no-restore --output ./nupkg $EXTRA_ARGS
 
