@@ -1,0 +1,47 @@
+name: Publish NuGet Package Template
+
+on:
+  workflow_call:
+    inputs:
+      project_path:
+        required: true
+        type: string
+      package_id:
+        required: true
+        type: string
+      use_package_reference:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ inputs.project_path }}
+
+      - name: Build and pack
+          dotnet pack ${{ inputs.project_path }} --configuration Release --no-restore --output ./nupkg \
+          ${{ inputs.use_package_reference && '-p:UsePackageReference=true' || '' }}
+
+      - name: Check if package version exists
+        id: check_version
+        run: |
+          VERSION=$(grep -Po '(?<=<Version>)[^<]+' ${{ inputs.project_path }})
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          EXISTS=$(curl -s https://api.nuget.org/v3-flatcontainer/${{ inputs.package_id | toLower }}/$VERSION/${{ inputs.package_id | toLower }}.$VERSION.nupkg | grep -c 'Not Found')
+          echo "exists=$EXISTS" >> $GITHUB_OUTPUT
+
+      - name: Publish package if version not exists
+        if: steps.check_version.outputs.exists != '0'
+        uses: NuGet/setup-nuget@v1
+
+      - if: steps.check_version.outputs.exists != '0'
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

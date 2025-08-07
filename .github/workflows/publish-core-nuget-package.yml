@@ -1,0 +1,15 @@
+name: Publish Core NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/core/**"
+
+jobs:
+  publish_core:
+    uses: ./.github/workflows/publish-nuget-template.yml
+    with:
+      project_path: src/core/CinnamonTrees.Core/CinnamonTrees.Core.csproj
+      package_id: CinnamonTrees.Core

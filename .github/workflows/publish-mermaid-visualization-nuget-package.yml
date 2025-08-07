@@ -1,0 +1,16 @@
+name: Publish Mermaid Visualization NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/visualization/mermaid/**"
+
+jobs:
+  publish_visualization:
+    uses: ./.github/workflows/publish-nuget-template.yml
+    with:
+      project_path: src/visualization/mermaid/CinnamonTrees.Visualization.Mermaid/CinnamonTrees.Visualization.Mermaid.csproj
+      package_id: CinnamonTrees.Visualization.Mermaid
+      use_package_reference: true

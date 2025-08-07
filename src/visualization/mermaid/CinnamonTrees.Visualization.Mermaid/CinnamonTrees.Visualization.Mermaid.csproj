@@ -6,9 +6,30 @@
         <Nullable>enable</Nullable>
         <RootNamespace>CinnamonTrees.Visualizer.Mermaid</RootNamespace>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PackageId>CinnamonTrees.Visualization.Mermaid</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Marcin Rakowski</Authors>
+        <Description>Mermaid visualization support for CinnamonTrees.Core</Description>
+        <PackageTags>decision-trees;logic;rules;visualization;mermaid</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/mr0406/cinnamon-trees</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <UsePackageReference>false</UsePackageReference>
+    </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\core\CinnamonTrees.Core\CinnamonTrees.Core.csproj" />
+    <ItemGroup Condition="'$(UsePackageReference)' == 'false'">
+        <ProjectReference Include="..\..\..\core\CinnamonTrees.Core\CinnamonTrees.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(UsePackageReference)' == 'true'">
+        <PackageReference Include="CinnamonTrees.Core" Version="[1.0.0,2.0.0)" />
     </ItemGroup>
 
 </Project>
