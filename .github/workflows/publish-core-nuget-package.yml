@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "src/core/**"
+  workflow_dispatch:
 
 jobs:
   publish_core:

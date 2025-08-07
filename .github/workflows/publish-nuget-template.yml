@@ -28,20 +28,37 @@ jobs:
         run: dotnet restore ${{ inputs.project_path }}
 
       - name: Build and pack
-          dotnet pack ${{ inputs.project_path }} --configuration Release --no-restore --output ./nupkg \
-          ${{ inputs.use_package_reference && '-p:UsePackageReference=true' || '' }}
+        run: |
+          EXTRA_ARGS=""
+          if [ "${{ inputs.use_package_reference }}" = "true" ]; then
+            EXTRA_ARGS="-p:UsePackageReference=true"
+          fi
+          dotnet pack ${{ inputs.project_path }} --configuration Release --no-restore --output ./nupkg $EXTRA_ARGS
+
+      - name: Extract version from project file
+        id: extract_version
+        run: |
+          VERSION=$(grep -Po '(?<=<Version>)[^<]+' ${{ inputs.project_path }})
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Check if package version exists
         id: check_version
         run: |
-          VERSION=$(grep -Po '(?<=<Version>)[^<]+' ${{ inputs.project_path }})
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          EXISTS=$(curl -s https://api.nuget.org/v3-flatcontainer/${{ inputs.package_id | toLower }}/$VERSION/${{ inputs.package_id | toLower }}.$VERSION.nupkg | grep -c 'Not Found')
+          PACKAGE_ID="${{ inputs.package_id }}"
+          LOWER_ID=$(echo "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')
+          VERSION=${{ steps.extract_version.outputs.version }}
+
+          EXISTS=$(curl -s https://api.nuget.org/v3-flatcontainer/$LOWER_ID/$VERSION/$LOWER_ID.$VERSION.nupkg | grep -c 'Not Found')
           echo "exists=$EXISTS" >> $GITHUB_OUTPUT
 
+          if [ "$EXISTS" -eq 0 ]; then
+            echo "Version $VERSION of package $PACKAGE_ID already exists on NuGet.org"
+            exit 1
+          fi
+
       - name: Publish package if version not exists
-        if: steps.check_version.outputs.exists != '0'
+        if: steps.check_version.outputs.exists == '1'
         uses: NuGet/setup-nuget@v1
 
-      - if: steps.check_version.outputs.exists != '0'
+      - if: steps.check_version.outputs.exists == '1'
         run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
