@@ -44,21 +44,22 @@ jobs:
       - name: Check if package version exists
         id: check_version
         run: |
-          PACKAGE_ID="${{ inputs.package_id }}"
-          LOWER_ID=$(echo "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')
-          VERSION=${{ steps.extract_version.outputs.version }}
+          PACKAGE_NAME="${{ inputs.package_id }}"
+          PACKAGE_VERSION="${{ steps.extract_version.outputs.version }}
+          LOWER_PACKAGE_NAME=$(echo "$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')
+          URL="https://api.nuget.org/v3-flatcontainer/${LOWER_PACKAGE_NAME}/${PACKAGE_VERSION}/${LOWER_PACKAGE_NAME}.nuspec"
 
-          EXISTS=$(curl -s https://api.nuget.org/v3-flatcontainer/$LOWER_ID/$VERSION/$LOWER_ID.$VERSION.nupkg | grep -c 'Not Found')
-          echo "exists=$EXISTS" >> $GITHUB_OUTPUT
-
-          if [ "$EXISTS" -eq 0 ]; then
-            echo "Version $VERSION of package $PACKAGE_ID already exists on NuGet.org"
-            exit 1
+          if curl --silent --head --fail "$URL" > /dev/null; then
+              echo "✅ Package exists."
+              echo "package_exists=true" >> "$GITHUB_ENV"
+          else
+              echo "❌ Package does not exist."
+              echo "package_exists=false" >> "$GITHUB_ENV"
           fi
 
       - name: Publish package if version not exists
-        if: steps.check_version.outputs.exists == '1'
+        if: steps.check_version.outputs.package_exists == 'false'
         uses: NuGet/setup-nuget@v1
 
-      - if: steps.check_version.outputs.exists == '1'
+      - if: steps.check_version.outputs.package_exists == 'false'
         run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
