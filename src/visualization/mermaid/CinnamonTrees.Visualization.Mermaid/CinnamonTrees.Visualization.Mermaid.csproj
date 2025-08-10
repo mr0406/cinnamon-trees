@@ -24,11 +24,7 @@
         <UsePackageReference Condition="'$(UsePackageReference)' == ''">false</UsePackageReference>
     </PropertyGroup>
 
-    <ItemGroup Condition="'$(UsePackageReference)' == 'false'">
-        <ProjectReference Include="..\..\..\core\CinnamonTrees.Core\CinnamonTrees.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UsePackageReference)' == 'true'">
+    <ItemGroup>
         <PackageReference Include="CinnamonTrees.Core" Version="[1.0.0,2.0.0)" />
     </ItemGroup>
 
