@@ -34,8 +34,6 @@ src/
 
 ## 📥 Installation
 
-_(coming soon via NuGet)_
-
 ```bash
 dotnet add package CinnamonTrees.Core
 dotnet add package CinnamonTrees.Visualization.Mermaid
