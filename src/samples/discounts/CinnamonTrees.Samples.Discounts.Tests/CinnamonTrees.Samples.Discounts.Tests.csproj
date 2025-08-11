@@ -37,6 +37,9 @@
       <None Update="MermaidVisualization\Snapshots\tree.mmd">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="MermaidVisualization\Snapshots\tree_with_configuration.mmd">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

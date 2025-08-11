@@ -1,0 +1,12 @@
+graph TD
+N1{"Customer is loyal?"}
+N1 -->|True| N11
+N11{"Check order value"}
+N11 -->|OrderValue > 500| N111
+N111["Big discount"]
+N11 -->|OrderValue > 200| N112
+N112["Small discount"]
+N11 -->|Default| N110
+N110["No discount"]
+N1 -->|False| N10
+N10["No discount"]

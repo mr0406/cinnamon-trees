@@ -12,7 +12,7 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             var snapshotPath = "MermaidVisualization/Snapshots/tree_with_trace.mmd";
             
             var tree = DiscountTreeBuilder.Build();
-            var diagram = MermaidVisualizeTree.VisualizeTree(tree.Root);
+            var diagram = MermaidVisualizeTree.VisualizeTree(tree);
 
             var decisionHistory = new List<int> { 1, 1 };
 
@@ -32,7 +32,7 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             var snapshotPath = "MermaidVisualization/Snapshots/tree_with_trace_with_input.mmd";
             
             var tree = DiscountTreeBuilder.Build();
-            var diagram = MermaidVisualizeTree.VisualizeTree(tree.Root);
+            var diagram = MermaidVisualizeTree.VisualizeTree(tree);
             var input = new DiscountInput(OrderValue: 300, Status: CustomerStatus.Loyal);
 
             var decisionHistory = new List<int> { 1, 1 };
