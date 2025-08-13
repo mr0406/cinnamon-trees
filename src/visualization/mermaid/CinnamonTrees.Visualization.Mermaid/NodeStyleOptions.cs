@@ -16,10 +16,22 @@ public record NodeStyleOptions(
     public override string ToString()
     {
         var parts = new List<string>();
-        if (!string.IsNullOrEmpty(Fill)) parts.Add($"fill:{Fill}");
-        if (!string.IsNullOrEmpty(Stroke)) parts.Add($"stroke:{Stroke}");
-        if (!string.IsNullOrEmpty(StrokeWidth)) parts.Add($"stroke-width:{StrokeWidth}");
-        if (!string.IsNullOrEmpty(Color)) parts.Add($"color:{Color}");
+        if (!string.IsNullOrEmpty(Fill))
+        {
+            parts.Add($"fill:{Fill}");
+        }
+        if (!string.IsNullOrEmpty(Stroke))
+        {
+            parts.Add($"stroke:{Stroke}");
+        }
+        if (!string.IsNullOrEmpty(StrokeWidth))
+        {
+            parts.Add($"stroke-width:{StrokeWidth}");
+        }
+        if (!string.IsNullOrEmpty(Color))
+        {
+            parts.Add($"color:{Color}");
+        }
         return string.Join(",", parts);
     }
 }
