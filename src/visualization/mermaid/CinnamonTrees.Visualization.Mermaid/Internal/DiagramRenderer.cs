@@ -8,12 +8,42 @@ internal class DiagramRenderer<TInput, TResult>
 {
     private readonly StringBuilder _sb = new();
 
-    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramConfiguration configuration)
+    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramLabels labels, DiagramStyle style)
     {
         _sb.Clear();
         _sb.AppendLine("graph TD");
-        VisitNode(tree.Root, "N1", configuration.TrueLabel, configuration.FalseLabel);
+        VisitNode(tree.Root, "N1", labels.TrueLabel, labels.FalseLabel);
+        
+        // Append style definitions if provided
+        AppendStyleDefinitions(style);
+        
         return _sb.ToString();
+    }
+
+    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramConfiguration configuration)
+    {
+        return GenerateDiagram(tree, new DiagramLabels(configuration.TrueLabel, configuration.FalseLabel), DiagramStyle.Default);
+    }
+
+    private void AppendStyleDefinitions(DiagramStyle style)
+    {
+        if (!string.IsNullOrEmpty(style.DecisionNodeStyle))
+        {
+            _sb.AppendLine();
+            _sb.AppendLine($"classDef decisionNode {style.DecisionNodeStyle};");
+        }
+        
+        if (!string.IsNullOrEmpty(style.LeafNodeStyle))
+        {
+            _sb.AppendLine();
+            _sb.AppendLine($"classDef leafNode {style.LeafNodeStyle};");
+        }
+        
+        if (!string.IsNullOrEmpty(style.EdgeStyle))
+        {
+            _sb.AppendLine();
+            _sb.AppendLine($"linkStyle default {style.EdgeStyle};");
+        }
     }
 
     private void VisitNode(

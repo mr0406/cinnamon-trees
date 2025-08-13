@@ -5,13 +5,13 @@ namespace CinnamonTrees.Visualizer.Mermaid.Internal;
 
 internal static class TraceRenderer
 {
-    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input)
+    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input, TraceHighlightStyle highlightStyle)
     {
         var sb = new StringBuilder();
         sb.AppendLine(diagram.Trim());
         sb.AppendLine();
 
-        sb.AppendLine("classDef highlight fill:#013300,stroke-width:2px,color:#fff;");
+        sb.AppendLine($"classDef highlight {highlightStyle.HighlightStyle};");
 
         if (input != null)
         {
@@ -24,12 +24,18 @@ internal static class TraceRenderer
                 
             sb.AppendLine($"{inputNodeId}[\"Input:<br><div style='text-align:left; font-size:0.8em; white-space:pre-wrap;'>{inputStr}</div>\"]");
             sb.AppendLine($"{inputNodeId} --> {rootNodeId}");
-            sb.AppendLine($"style {inputNodeId} fill:#013366,stroke-width:2px,color:#fff;");
+            sb.AppendLine($"style {inputNodeId} {highlightStyle.InputNodeStyle};");
         }
 
         var pathNodes = NodeIdHelper.GetNodesOnPath(decisionHistory);
         sb.AppendLine($"class {string.Join(",", pathNodes)} highlight;");
 
         return sb.ToString();
+    }
+
+    // Backward compatibility method
+    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input)
+    {
+        return RenderTrace(diagram, decisionHistory, input, TraceHighlightStyle.Default);
     }
 }
