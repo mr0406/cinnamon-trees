@@ -11,7 +11,8 @@ internal static class TraceRenderer
         sb.AppendLine(diagram.Trim());
         sb.AppendLine();
 
-        sb.AppendLine($"classDef highlight {highlightStyle.HighlightStyle};");
+        var highlightCss = highlightStyle.HighlightStyle?.ToCssString() ?? TraceHighlightStyle.DefaultHighlightStyle.ToCssString();
+        sb.AppendLine($"classDef highlight {highlightCss};");
 
         if (input != null)
         {
@@ -24,18 +25,14 @@ internal static class TraceRenderer
                 
             sb.AppendLine($"{inputNodeId}[\"Input:<br><div style='text-align:left; font-size:0.8em; white-space:pre-wrap;'>{inputStr}</div>\"]");
             sb.AppendLine($"{inputNodeId} --> {rootNodeId}");
-            sb.AppendLine($"style {inputNodeId} {highlightStyle.InputNodeStyle};");
+            
+            var inputCss = highlightStyle.InputNodeStyle?.ToCssString() ?? TraceHighlightStyle.DefaultInputNodeStyle.ToCssString();
+            sb.AppendLine($"style {inputNodeId} {inputCss};");
         }
 
         var pathNodes = NodeIdHelper.GetNodesOnPath(decisionHistory);
         sb.AppendLine($"class {string.Join(",", pathNodes)} highlight;");
 
         return sb.ToString();
-    }
-
-    // Backward compatibility method
-    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input)
-    {
-        return RenderTrace(diagram, decisionHistory, input, TraceHighlightStyle.Default);
     }
 }

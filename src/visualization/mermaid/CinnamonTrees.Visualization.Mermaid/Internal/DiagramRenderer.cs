@@ -20,29 +20,36 @@ internal class DiagramRenderer<TInput, TResult>
         return _sb.ToString();
     }
 
-    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramConfiguration configuration)
-    {
-        return GenerateDiagram(tree, new DiagramLabels(configuration.TrueLabel, configuration.FalseLabel), DiagramStyle.Default);
-    }
-
     private void AppendStyleDefinitions(DiagramStyle style)
     {
-        if (!string.IsNullOrEmpty(style.DecisionNodeStyle))
+        if (style.DecisionNodeStyle != null)
         {
-            _sb.AppendLine();
-            _sb.AppendLine($"classDef decisionNode {style.DecisionNodeStyle};");
+            var cssString = style.DecisionNodeStyle.ToCssString();
+            if (!string.IsNullOrEmpty(cssString))
+            {
+                _sb.AppendLine();
+                _sb.AppendLine($"classDef decisionNode {cssString};");
+            }
         }
         
-        if (!string.IsNullOrEmpty(style.LeafNodeStyle))
+        if (style.LeafNodeStyle != null)
         {
-            _sb.AppendLine();
-            _sb.AppendLine($"classDef leafNode {style.LeafNodeStyle};");
+            var cssString = style.LeafNodeStyle.ToCssString();
+            if (!string.IsNullOrEmpty(cssString))
+            {
+                _sb.AppendLine();
+                _sb.AppendLine($"classDef leafNode {cssString};");
+            }
         }
         
-        if (!string.IsNullOrEmpty(style.EdgeStyle))
+        if (style.EdgeStyle != null)
         {
-            _sb.AppendLine();
-            _sb.AppendLine($"linkStyle default {style.EdgeStyle};");
+            var cssString = style.EdgeStyle.ToCssString();
+            if (!string.IsNullOrEmpty(cssString))
+            {
+                _sb.AppendLine();
+                _sb.AppendLine($"linkStyle default {cssString};");
+            }
         }
     }
 

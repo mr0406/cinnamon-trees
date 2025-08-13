@@ -83,8 +83,8 @@ public class MermaidVisualizeTreeTests
         // Given
         var tree = DiscountTreeBuilder.Build();
         var style = new DiagramStyle(
-            DecisionNodeStyle: "fill:#f9f,stroke:#333,stroke-width:2px",
-            LeafNodeStyle: "fill:#bbf,stroke:#333,stroke-width:2px");
+            DecisionNodeStyle: new StyleProperties(Fill: "#f9f", Stroke: "#333", StrokeWidth: "2px"),
+            LeafNodeStyle: new StyleProperties(Fill: "#bbf", Stroke: "#333", StrokeWidth: "2px"));
         
         // When
         var diagram = MermaidVisualizeTree.VisualizeTree(tree, DiagramLabels.Default, style);
@@ -112,7 +112,7 @@ public class MermaidVisualizeTreeTests
     {
         // Given
         var tree = DiscountTreeBuilder.Build();
-        var style = new DiagramStyle(DecisionNodeStyle: "fill:#f9f,stroke:#333,stroke-width:2px");
+        var style = new DiagramStyle(DecisionNodeStyle: new StyleProperties(Fill: "#f9f", Stroke: "#333", StrokeWidth: "2px"));
         
         // When
         var diagram = MermaidVisualizeTree.VisualizeTree(tree, DiagramLabels.Default, style);

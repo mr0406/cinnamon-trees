@@ -27,14 +27,13 @@ public static class MermaidVisualizeTree
     }
 
     /// <summary>
-    /// Backward compatibility method that accepts the legacy DiagramConfiguration.
+    /// Generates a Mermaid diagram for the decision tree using legacy DiagramConfiguration.
     /// </summary>
     /// <typeparam name="TInput">The input type for the decision tree</typeparam>
     /// <typeparam name="TResult">The result enum type for the decision tree</typeparam>
     /// <param name="tree">The decision tree to visualize</param>
     /// <param name="configuration">Legacy configuration object</param>
     /// <returns>A Mermaid diagram string</returns>
-    [Obsolete("Use VisualizeTree(tree, labels, style) instead. This method will be removed in a future version.")]
     public static string VisualizeTree<TInput, TResult>(
         DecisionTree<TInput, TResult> tree,
         DiagramConfiguration? configuration)

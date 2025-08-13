@@ -73,8 +73,8 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             var diagram = MermaidVisualizeTree.VisualizeTree(tree);
             var decisionHistory = new List<int> { 1, 1 };
             var customHighlightStyle = new TraceHighlightStyle(
-                HighlightStyle: "fill:#ff0000,stroke-width:3px,color:#fff",
-                InputNodeStyle: "fill:#0000ff,stroke-width:3px,color:#fff");
+                HighlightStyle: new StyleProperties(Fill: "#ff0000", StrokeWidth: "3px", Color: "#fff"),
+                InputNodeStyle: new StyleProperties(Fill: "#0000ff", StrokeWidth: "3px", Color: "#fff"));
 
             // When
             var diagramWithTrace = MermaidVisualizeTree.VisualizeTreeWithTrace(diagram, decisionHistory, null, customHighlightStyle);
@@ -92,7 +92,7 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             var decisionHistory = new List<int> { 1, 1 };
             var input = new DiscountInput(OrderValue: 300, Status: CustomerStatus.Loyal);
             var customHighlightStyle = new TraceHighlightStyle(
-                InputNodeStyle: "fill:#0000ff,stroke-width:3px,color:#fff");
+                InputNodeStyle: new StyleProperties(Fill: "#0000ff", StrokeWidth: "3px", Color: "#fff"));
 
             // When
             var diagramWithTrace = MermaidVisualizeTree.VisualizeTreeWithTrace(diagram, decisionHistory, input, customHighlightStyle);
