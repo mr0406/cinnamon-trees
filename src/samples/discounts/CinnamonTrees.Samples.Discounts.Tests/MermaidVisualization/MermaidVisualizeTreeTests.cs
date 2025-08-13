@@ -106,4 +106,20 @@ public class MermaidVisualizeTreeTests
         // Then
         diagram.ShouldNotContain("classDef");
     }
+
+    [Test]
+    public void WhenRenderMermaidDiagram_WithPartialStyle_ThenShouldOnlyContainProvidedStyles()
+    {
+        // Given
+        var tree = DiscountTreeBuilder.Build();
+        var style = new DiagramStyle(DecisionNodeStyle: "fill:#f9f,stroke:#333,stroke-width:2px");
+        
+        // When
+        var diagram = MermaidVisualizeTree.VisualizeTree(tree, DiagramLabels.Default, style);
+
+        // Then
+        diagram.ShouldContain("classDef decisionNode fill:#f9f,stroke:#333,stroke-width:2px;");
+        diagram.ShouldNotContain("classDef leafNode");
+        diagram.ShouldNotContain("linkStyle");
+    }
 }
