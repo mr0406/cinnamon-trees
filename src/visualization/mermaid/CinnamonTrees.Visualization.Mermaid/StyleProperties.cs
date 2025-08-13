@@ -22,16 +22,24 @@ public record StyleProperties(
         var properties = new List<string>();
         
         if (!string.IsNullOrEmpty(Fill))
+        {
             properties.Add($"fill:{Fill}");
+        }
             
         if (!string.IsNullOrEmpty(Stroke))
+        {
             properties.Add($"stroke:{Stroke}");
+        }
             
         if (!string.IsNullOrEmpty(StrokeWidth))
+        {
             properties.Add($"stroke-width:{StrokeWidth}");
+        }
             
         if (!string.IsNullOrEmpty(Color))
+        {
             properties.Add($"color:{Color}");
+        }
             
         return string.Join(",", properties);
     }
