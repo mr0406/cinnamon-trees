@@ -8,11 +8,15 @@ internal class DiagramRenderer<TInput, TResult>
 {
     private readonly StringBuilder _sb = new();
 
-    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramConfiguration configuration)
+    internal string GenerateDiagram(DecisionTree<TInput, TResult> tree, DiagramConfiguration configuration, DiagramStyle style)
     {
         _sb.Clear();
         _sb.AppendLine("graph TD");
         VisitNode(tree.Root, "N1", configuration.TrueLabel, configuration.FalseLabel);
+        
+        _sb.AppendLine();
+        _sb.AppendLine($"classDef default fill:{style.Fill},stroke:{style.Stroke},color:{style.Color};");
+        
         return _sb.ToString();
     }
 

@@ -6,17 +6,19 @@ public static class MermaidVisualizeTree
 {
     public static string VisualizeTree<TInput, TResult>(
         DecisionTree<TInput, TResult> tree,
-        DiagramConfiguration? configuration = null)
+        DiagramConfiguration? configuration = null,
+        DiagramStyle? style = null)
         where TResult : Enum
         where TInput : class
     {
         configuration ??= DiagramConfiguration.Default;
+        style ??= new DiagramStyle();
         
-        return new DiagramRenderer<TInput, TResult>().GenerateDiagram(tree, configuration);
+        return new DiagramRenderer<TInput, TResult>().GenerateDiagram(tree, configuration, style);
     }
 
-    public static string VisualizeTreeWithTrace(string diagram, List<int> decisionHistory, object? input = null)
+    public static string VisualizeTreeWithTrace(string diagram, List<int> decisionHistory, HighlightStyle? highlightStyle = null, object? input = null)
     {
-        return TraceRenderer.RenderTrace(diagram, decisionHistory, input);
+        return TraceRenderer.RenderTrace(diagram, decisionHistory, input, highlightStyle);
     }
 }

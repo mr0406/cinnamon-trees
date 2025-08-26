@@ -38,7 +38,7 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             var decisionHistory = new List<int> { 1, 1 };
 
             // When
-            var diagramWithTrace = MermaidVisualizeTree.VisualizeTreeWithTrace(diagram, decisionHistory, input);
+            var diagramWithTrace = MermaidVisualizeTree.VisualizeTreeWithTrace(diagram, decisionHistory, input: input);
 
             // Then
             var expectedDiagramWithTrace = File.ReadAllText(snapshotPath);

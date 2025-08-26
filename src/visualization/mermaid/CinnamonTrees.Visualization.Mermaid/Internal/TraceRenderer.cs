@@ -5,13 +5,15 @@ namespace CinnamonTrees.Visualizer.Mermaid.Internal;
 
 internal static class TraceRenderer
 {
-    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input)
+    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input, HighlightStyle? highlightStyle = null)
     {
+        highlightStyle ??= new HighlightStyle();
+        
         var sb = new StringBuilder();
         sb.AppendLine(diagram.Trim());
         sb.AppendLine();
 
-        sb.AppendLine("classDef highlight fill:#013300,stroke-width:2px,color:#fff;");
+        sb.AppendLine($"classDef highlight fill:{highlightStyle.Fill},stroke:{highlightStyle.Stroke},color:{highlightStyle.Color};");
 
         if (input != null)
         {
@@ -24,7 +26,7 @@ internal static class TraceRenderer
                 
             sb.AppendLine($"{inputNodeId}[\"Input:<br><div style='text-align:left; font-size:0.8em; white-space:pre-wrap;'>{inputStr}</div>\"]");
             sb.AppendLine($"{inputNodeId} --> {rootNodeId}");
-            sb.AppendLine($"style {inputNodeId} fill:#013366,stroke-width:2px,color:#fff;");
+            sb.AppendLine($"style {inputNodeId} fill:{highlightStyle.Fill},stroke:{highlightStyle.Stroke},color:{highlightStyle.Color};");
         }
 
         var pathNodes = NodeIdHelper.GetNodesOnPath(decisionHistory);
