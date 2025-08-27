@@ -26,11 +26,11 @@ internal static class TraceRenderer
                 
             sb.AppendLine($"{inputNodeId}[\"Input:<br><div style='text-align:left; font-size:0.8em; white-space:pre-wrap;'>{inputStr}</div>\"]");
             sb.AppendLine($"{inputNodeId} --> {rootNodeId}");
-            sb.AppendLine($"style {inputNodeId} fill:{highlightStyle.Fill},stroke:{highlightStyle.Stroke},color:{highlightStyle.Color};");
         }
 
         var pathNodes = NodeIdHelper.GetNodesOnPath(decisionHistory);
-        sb.AppendLine($"class {string.Join(",", pathNodes)} highlight;");
+        var allHighlightNodes = input != null ? $"NInput,{string.Join(",", pathNodes)}" : string.Join(",", pathNodes);
+        sb.AppendLine($"class {allHighlightNodes} highlight;");
 
         return sb.ToString();
     }
