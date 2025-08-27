@@ -1,34 +1,31 @@
 using System.Text;
-using System.Text.Json;
 
 namespace CinnamonTrees.Visualizer.Mermaid.Internal;
 
 internal static class TraceRenderer
 {
-    internal static string RenderTrace(string diagram, List<int> decisionHistory, object? input)
+    internal static string RenderTrace(string diagram, List<int> decisionHistory, string? input, HighlightStyle highlightStyle)
     {
         var sb = new StringBuilder();
         sb.AppendLine(diagram.Trim());
         sb.AppendLine();
 
-        sb.AppendLine("classDef highlight fill:#013300,stroke-width:2px,color:#fff;");
+        sb.AppendLine($"classDef highlight fill:{highlightStyle.Fill},stroke:{highlightStyle.Stroke},color:{highlightStyle.Color};");
 
-        if (input != null)
+        if (!string.IsNullOrEmpty(input))
         {
-            var inputStr = JsonSerializer.Serialize(input, new JsonSerializerOptions { WriteIndented = true });
-            inputStr = inputStr.Replace("\n", "<br>");
-            inputStr = inputStr.Replace("\"", "&quot;");
+            var inputStr = input.Replace("\n", "<br>");
                 
             var rootNodeId = NodeIdHelper.RootNodeId;
             var inputNodeId = "NInput";
                 
-            sb.AppendLine($"{inputNodeId}[\"Input:<br><div style='text-align:left; font-size:0.8em; white-space:pre-wrap;'>{inputStr}</div>\"]");
+            sb.AppendLine($"{inputNodeId}[\"{inputStr}\"]");
             sb.AppendLine($"{inputNodeId} --> {rootNodeId}");
-            sb.AppendLine($"style {inputNodeId} fill:#013366,stroke-width:2px,color:#fff;");
         }
 
         var pathNodes = NodeIdHelper.GetNodesOnPath(decisionHistory);
-        sb.AppendLine($"class {string.Join(",", pathNodes)} highlight;");
+        var allHighlightNodes = !string.IsNullOrEmpty(input) ? $"NInput,{string.Join(",", pathNodes)}" : string.Join(",", pathNodes);
+        sb.AppendLine($"class {allHighlightNodes} highlight;");
 
         return sb.ToString();
     }
