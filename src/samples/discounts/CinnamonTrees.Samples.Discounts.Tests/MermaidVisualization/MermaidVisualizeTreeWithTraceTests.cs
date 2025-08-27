@@ -33,7 +33,7 @@ namespace CinnamonTrees.Samples.Discounts.Tests.MermaidVisualization
             
             var tree = DiscountTreeBuilder.Build();
             var diagram = MermaidVisualizeTree.VisualizeTree(tree);
-            var input = new DiscountInput(OrderValue: 300, Status: CustomerStatus.Loyal);
+            var input = "OrderValue: 300\nStatus: Loyal";
 
             var decisionHistory = new List<int> { 1, 1 };
 

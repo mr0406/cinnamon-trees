@@ -28,4 +28,5 @@ public class CustomStylingTests
         
         tracedDiagram.ShouldContain("classDef highlight fill:#9c27b0,stroke:#7b1fa2,color:#ffffff;");
     }
+    
 }

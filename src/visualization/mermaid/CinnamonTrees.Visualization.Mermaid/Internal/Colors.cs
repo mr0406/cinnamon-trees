@@ -1,4 +1,4 @@
-namespace CinnamonTrees.Visualizer.Mermaid;
+namespace CinnamonTrees.Visualizer.Mermaid.Internal;
 
 internal static class Colors
 {

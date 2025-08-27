@@ -17,8 +17,10 @@ public static class MermaidVisualizeTree
         return new DiagramRenderer<TInput, TResult>().GenerateDiagram(tree, configuration, style);
     }
 
-    public static string VisualizeTreeWithTrace(string diagram, List<int> decisionHistory, HighlightStyle? highlightStyle = null, object? input = null)
+    public static string VisualizeTreeWithTrace(string diagram, List<int> decisionHistory, string? input = null, HighlightStyle? highlightStyle = null)
     {
+        highlightStyle ??= new HighlightStyle();
+        
         return TraceRenderer.RenderTrace(diagram, decisionHistory, input, highlightStyle);
     }
 }

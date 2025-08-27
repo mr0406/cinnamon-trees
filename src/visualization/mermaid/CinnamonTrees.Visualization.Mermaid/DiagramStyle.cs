@@ -1,3 +1,5 @@
+using CinnamonTrees.Visualizer.Mermaid.Internal;
+
 namespace CinnamonTrees.Visualizer.Mermaid;
 
 public record DiagramStyle(
