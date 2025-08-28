@@ -6,7 +6,7 @@ A lightweight, extensible rule-tree engine for building and visualizing logical 
 
 ---
 
-## 🌳 Why Decision Trees for Business Logic?
+## 🌳 Why Decision Trees for Business Logic
 
 **Business rules are naturally tree-like.** "If customer is VIP, then check order value. If over $500, apply big discount, otherwise small discount." This reads like a decision tree because it *is* one.
 
